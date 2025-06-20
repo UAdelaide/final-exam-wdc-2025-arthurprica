@@ -11,7 +11,7 @@ router.get('/dogs', async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to retrieve list of dogs', details: err.message });
+    res.status(500).json({ error: 'Failed to return list of dogs', details: err.message });
   }
 });
 
