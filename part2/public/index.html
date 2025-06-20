@@ -28,29 +28,25 @@
       <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
 
-<h2 class="mt-5">All Registered Dogs</h2>
-<table class="table table-bordered mt-3" v-if="dogs.length">
-  <thead class="table-light">
-    <tr>
-      <th>ID</th>
-      <th>Photo</th>
-      <th>Name</th>
-      <th>Size</th>
-      <th>Owner ID</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="dog in dogs" :key="dog.dog_id">
-      <td>{{ dog.dog_id }}</td>
-      <td>
-        <img :src="dog.photo || 'https://via.placeholder.com/100?text=No+Image'" :alt="dog.dog_name" style="width:100px; height:auto;">
-      </td>
-      <td>{{ dog.dog_name }}</td>
-      <td>{{ dog.size }}</td>
-      <td>{{ dog.owner_id }}</td>
-    </tr>
-  </tbody>
-</table>
+    <h2 class="mt-5">All Registered Dogs</h2>
+    <table class="table table-bordered mt-3" v-if="dogs.length">
+      <thead class="table-light">
+        <tr>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Owner</th>
+          <th>Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="dog in dogs" :key="dog.dog_id || dog.dog_name">
+          <td>{{ dog.dog_name }}</td>
+          <td>{{ dog.size }}</td>
+          <td>{{ dog.owner_username }}</td>
+          <td><img :src="dog.photo" :alt="dog.dog_name" style="width:100px;height:auto;"></td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- Error message if failed to login -->
     <div v-if="error" class="alert alert-danger">{{ error }}</div>
