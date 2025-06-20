@@ -36,20 +36,26 @@
     <button type="button" id="logoutBtn" class="btn btn-danger">Logout</button> <!-- Logout button -->
   </div>
 <script>
-  document.getElementById('logoutBtn').addEventListener('click', async () => {
-    try {
-      const res = await fetch('/api/users/logout', {
-        method: 'POST',
-        credentials: 'include' // Ensures session cookie is sent
+  window.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async () => {
+        try {
+          const res = await fetch('/api/users/logout', {
+            method: 'POST',
+            credentials: 'same-origin'
+          });
+          if (res.ok) {
+            window.location.href = '/';
+          } else {
+            alert('Logout failed');
+          }
+        } catch (err) {
+          alert('Logout error');
+        }
       });
-
-      if (res.ok) {
-        window.location.href = '/'; // Redirect to login page
-      } else {
-        alert('Logout failed');
-      }
-    } catch (err) {
-      alert('Logout error');
+    } else {
+      console.error('Logout button not found');
     }
   });
 </script>
