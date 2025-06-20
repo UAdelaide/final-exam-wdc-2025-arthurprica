@@ -60,6 +60,7 @@
         const password = ref('');  // Input: user password
         const message = ref('Welcome!');
         const error = ref('');     // Error message for failed login
+        const dogs = ref([]);
 
         // Login function: sends email/password to backend
         async function login() {
