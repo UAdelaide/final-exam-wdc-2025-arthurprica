@@ -40,10 +40,11 @@
     try {
       const res = await fetch('/api/users/logout', {
         method: 'POST',
-        credentials: 'same-origin'  // <-- this is key for sending session cookie
+        credentials: 'same-origin' // Ensures session cookie is sent
       });
+
       if (res.ok) {
-        window.location.href = '/';  // Redirect to login page
+        window.location.href = '/'; // Redirect to login page
       } else {
         alert('Logout failed');
       }
