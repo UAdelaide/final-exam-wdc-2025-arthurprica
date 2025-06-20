@@ -91,32 +91,29 @@
           }
         }
 
-        async function loadDogs() {
-          try {
-            const res = await fetch('/api/dogs');
-            const dogList = await res.json();
+async function loadDogs() {
+  try {
+    const res = await fetch('/api/dogs');
+    const dogList = await res.json();
 
-            // Add a random image from dog.ceo to each dog
-            const dogPromises = dogList.map(async (dog) => {
-              let breed = dog.breed.toLowerCase();
-              let imageUrl = '';
+    // Attach a completely random photo to each dog
+    const dogPromises = dogList.map(async (dog) => {
+      let imageUrl = '';
+      try {
+        const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
+        const imgData = await imgRes.json();
+        imageUrl = imgData.message;
+      } catch {
+        imageUrl = 'https://via.placeholder.com/100?text=No+Image';
+      }
+      return { ...dog, photo: imageUrl };
+    });
 
-              try {
-                const imgRes = await fetch(`https://dog.ceo/api/breed/${breed}/images/random`);
-                const imgData = await imgRes.json();
-                imageUrl = imgData.message;
-              } catch (imgErr) {
-                imageUrl = 'https://via.placeholder.com/100?text=No+Image'; // fallback
-              }
-
-              return { ...dog, photo: imageUrl };
-            });
-
-            dogs.value = await Promise.all(dogPromises);
-          } catch (err) {
-            console.error('Error loading dogs:', err);
-          }
-        }
+    dogs.value = await Promise.all(dogPromises);
+  } catch (err) {
+    console.error('Error loading dogs:', err);
+  }
+}
 
         onMounted(() => {
           loadDogs();
