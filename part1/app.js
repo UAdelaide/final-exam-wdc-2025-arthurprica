@@ -79,7 +79,6 @@ const db = require('./db');
       `);
 
       console.log('Test data');
-    }
   } catch (err) {
     console.error('No test data:', err.message);
   }
