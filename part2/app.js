@@ -12,8 +12,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'secret', // For signing session ID cookies
-  resave: false,                                  // Don’f unmodified
-  saveUninitialized: false                        // Don’t create session until something is stored
+  resave: false,                                  // If not changed then don't save session
+  saveUninitialized: false                        // Create session of something is stored
 }));
 
 // Routes
