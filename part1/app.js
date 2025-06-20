@@ -33,7 +33,6 @@ const db = require('./db');
         ('donaldtrump', 'donald@example.com', 'hashed111', 'owner'),
         ('elonmusk', 'elon@example.com', 'hashed222', 'owner')
       `);
-    }
 
       await db.query(`
         INSERT INTO Dogs (owner_id, name, size)
