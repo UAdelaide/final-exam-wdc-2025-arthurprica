@@ -80,7 +80,7 @@ async function getCurrentUser() {
 
     // Validate role
     if (user.role !== 'walker') {
-      throw new Error('You are not authorized as a walker');
+      throw new Error('Not authorised');
     }
 
     walkerId.value = user.user_id;
