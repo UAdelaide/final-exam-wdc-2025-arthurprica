@@ -79,7 +79,6 @@
             if (!res.ok) throw new Error('Not logged in');
             const user = await res.json();
 
-            // Validate role
             if (user.role !== 'walker') {
               throw new Error('Not authorised');
             }
