@@ -2,7 +2,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mysql = require('mysql2/promise');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -20,11 +19,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 
-let db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  database: 'DogWalkService'
-});
+const db = require('./db');
 
 (async () => {
   try {
@@ -92,4 +87,4 @@ let db = mysql.createPool({
   }
 })();
 
-module.exports = { app, db };
+module.exports = app;
