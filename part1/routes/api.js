@@ -33,7 +33,7 @@ router.get('/walkrequests/open', async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to retrieve open walk requests', details: err.message });
+    res.status(500).json({ error: 'Failed to return open walk requests', details: err.message });
   }
 });
 
@@ -58,7 +58,7 @@ router.get('/walkers/summary', async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to retrieve walker summary', details: err.message });
+    res.status(500).json({ error: 'Failed to return walker summary', details: err.message });
   }
 });
 
