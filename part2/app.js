@@ -4,6 +4,8 @@ require('dotenv').config();
 
 const app = express();
 
+const session = require('express-session');  // ✅ Add session support
+
 // Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));
