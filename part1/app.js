@@ -19,10 +19,30 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 
-const db = require('./db');
-
 (async () => {
   try {
+
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      // password: 'your_password', // add this if you use a password
+      multipleStatements: true
+    });
+
+    // Drop database if exists and recreate it
+    await connection.query(`
+      DROP DATABASE IF EXISTS DogWalkService;
+      CREATE DATABASE DogWalkService;
+      USE DogWalkService;
+    `);
+
+    // Now create a new connection pool to the newly created database
+    const db = mysql.createPool({
+      host: 'localhost',
+      user: 'root',
+      // password: 'your_password', // add if needed
+      database: 'DogWalkService'
+    });
     const [users] = await db.query('SELECT COUNT(*) AS count FROM Users');
     if (users[0].count === 0) {
       await db.query(`
