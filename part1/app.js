@@ -33,8 +33,10 @@ const db = require('./db');
         ('donaldtrump', 'donald@example.com', 'hashed111', 'owner'),
         ('elonmusk', 'elon@example.com', 'hashed222', 'owner')
       `);
+    }
 
-      await db.query(`
+    const [dogs] = await db.query('SELECT COUNT(*) AS count FROM Users');
+    if (dogs[0].count === 0) { await db.query(`
         INSERT INTO Dogs (owner_id, name, size)
         VALUES
         ((SELECT user_id FROM Users WHERE username = 'alice123'), 'Max', 'medium'),
