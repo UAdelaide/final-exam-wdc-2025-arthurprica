@@ -70,7 +70,7 @@
     try {
       const res = await fetch('/api/users/logout', {
         method: 'POST',
-        credentials: 'same-origin'  // <-- this is key for sending session cookie
+        credentials: 'include'  // <-- this is key for sending session cookie
       });
       if (res.ok) {
         window.location.href = '/';  // Redirect to login page
