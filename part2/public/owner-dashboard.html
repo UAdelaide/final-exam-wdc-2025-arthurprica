@@ -65,10 +65,13 @@
     <button type="button" id="logoutBtn" class="btn btn-danger">Logout</button> <!-- Logout button -->
   </div>
 
-  <script>
+<script>
   document.getElementById('logoutBtn').addEventListener('click', async () => {
     try {
-      const res = await fetch('/api/users/logout', { method: 'POST' });
+      const res = await fetch('/api/users/logout', {
+        method: 'POST',
+        credentials: 'same-origin'  // <-- this is key for sending session cookie
+      });
       if (res.ok) {
         window.location.href = '/';  // Redirect to login page
       } else {
