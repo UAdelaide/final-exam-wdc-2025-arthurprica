@@ -92,4 +92,4 @@ let db = mysql.createPool({
   }
 })();
 
-module.exports = app;
+module.exports = { app, db };
