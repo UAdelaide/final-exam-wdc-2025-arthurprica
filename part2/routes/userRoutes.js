@@ -63,9 +63,10 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
   req.session.destroy(err => {
     if (err) {
+      console.error('Session destruction error:', err);
       return res.status(500).json({ error: 'Logout failed' });
     }
-    res.clearCookie('connect.sid'); // default cookie name of express-session
+    res.clearCookie('connect.sid'); // Clear cookie on client
     res.json({ message: 'Logged out' });
   });
 });
