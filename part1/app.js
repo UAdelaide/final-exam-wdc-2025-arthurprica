@@ -52,7 +52,6 @@ const db = require('./db');
         (2, (SELECT user_id FROM Users WHERE username = 'bobwalker'), 'accepted')
       `);
 
-      // Insert walk rating
       await db.query(`
         INSERT INTO WalkRatings (request_id, walker_id, owner_id, rating, comments)
         VALUES
