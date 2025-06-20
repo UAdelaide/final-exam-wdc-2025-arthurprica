@@ -11,11 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-const db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  database: 'DogWalkService'
-});
+let db;
 
 (async () => {
   try {

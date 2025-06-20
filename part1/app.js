@@ -19,7 +19,11 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 
-const db = require('./db');
+let db = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  database: 'DogWalkService'
+});
 
 (async () => {
   try {
