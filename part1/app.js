@@ -48,7 +48,7 @@ const db = require('./db');
       `);
     }
 
-    const [requests] = await db.query('SELECT COUNT(*) AS count FROM Users');
+    const [requests] = await db.query('SELECT COUNT(*) AS count FROM WalkRequests');
     if (requests[0].count === 0) {
       await db.query(`
         INSERT INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status)
@@ -66,7 +66,7 @@ const db = require('./db');
       `);
     }
 
-    const [applications] = await db.query('SELECT COUNT(*) AS count FROM Users');
+    const [applications] = await db.query('SELECT COUNT(*) AS count FROM WalkApplications');
     if (applications[0].count === 0) {
       await db.query(`
         INSERT INTO WalkApplications (request_id, walker_id, status)
@@ -77,7 +77,7 @@ const db = require('./db');
       `);
     }
 
-    const [ratings] = await db.query('SELECT COUNT(*) AS count FROM Users');
+    const [ratings] = await db.query('SELECT COUNT(*) AS count FROM WalkRatings');
     if (ratings[0].count === 0) {
       await db.query(`
         INSERT INTO WalkRatings (request_id, walker_id, owner_id, rating, comments)
