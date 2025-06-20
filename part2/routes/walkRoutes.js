@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/my-dogs', async (req, res) => {
+router.get('/getdogs', async (req, res) => {
   const user = req.session.user;
   if (!user || user.role !== 'owner') {
     return res.status(401).json({ error: 'Unauthorized' });
