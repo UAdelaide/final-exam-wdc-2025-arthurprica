@@ -28,18 +28,15 @@ app.use('/api', apiRouter);
       multipleStatements: true
     });
 
-    // Drop database if exists and recreate it
     await connection.query(`
       DROP DATABASE IF EXISTS DogWalkService;
       CREATE DATABASE DogWalkService;
       USE DogWalkService;
     `);
 
-    // Now create a new connection pool to the newly created database
     const db = mysql.createPool({
       host: 'localhost',
       user: 'root',
-      // password: 'your_password', // add if needed
       database: 'DogWalkService'
     });
     const [users] = await db.query('SELECT COUNT(*) AS count FROM Users');
