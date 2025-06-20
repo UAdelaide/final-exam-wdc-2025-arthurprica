@@ -19,6 +19,24 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/my-dogs', async (req, res) => {
+  const user = req.session.user;
+  if (!user || user.role !== 'owner') {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const [rows] = await db.query(
+      `SELECT dog_id, name FROM Dogs WHERE owner_id = ?`,
+      [user.user_id]
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error('Failed to fetch dogs:', error);
+    res.status(500).json({ error: 'Failed to fetch dogs' });
+  }
+});
+
 // POST a new walk request (from owner)
 router.post('/', async (req, res) => {
   const { dog_id, requested_time, duration_minutes, location } = req.body;
