@@ -43,11 +43,7 @@
     <tr v-for="dog in dogs" :key="dog.dog_id">
       <td>{{ dog.dog_id }}</td>
       <td>
-        <img
-          :src="dog.photo || 'https://via.placeholder.com/100?text=No+Image'"
-          :alt="dog.dog_name"
-          style="width:100px; height:auto;"
-        >
+        <img :src="dog.photo || 'https://via.placeholder.com/100?text=No+Image'" :alt="dog.dog_name" style="width:100px; height:auto;">
       </td>
       <td>{{ dog.dog_name }}</td>
       <td>{{ dog.size }}</td>
