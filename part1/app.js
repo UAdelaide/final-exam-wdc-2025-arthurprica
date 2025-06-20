@@ -48,6 +48,8 @@ const db = require('./db');
       `);
     }
 
+    const [requests] = await db.query('SELECT COUNT(*) AS count FROM Users');
+    if (requests[0].count === 0) {
       await db.query(`
         INSERT INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status)
         VALUES
