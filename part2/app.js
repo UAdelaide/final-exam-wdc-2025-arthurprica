@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'dogsecret', // Secret for signing session ID cookies
+  secret: process.env.SESSION_SECRET || 'secret', // Secret for signing session ID cookies
   resave: false,                  // Don’t save session if unmodified
   saveUninitialized: false        // Don’t create session until something is stored
 }));
