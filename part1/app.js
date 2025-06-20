@@ -36,7 +36,8 @@ const db = require('./db');
     }
 
     const [dogs] = await db.query('SELECT COUNT(*) AS count FROM Users');
-    if (dogs[0].count === 0) { await db.query(`
+    if (dogs[0].count === 0)
+        { await db.query(`
         INSERT INTO Dogs (owner_id, name, size)
         VALUES
         ((SELECT user_id FROM Users WHERE username = 'alice123'), 'Max', 'medium'),
@@ -45,6 +46,7 @@ const db = require('./db');
         ((SELECT user_id FROM Users WHERE username = 'donaldtrump'), 'Vance', 'small'),
         ((SELECT user_id FROM Users WHERE username = 'elonmusk'), 'X', 'large')
       `);
+    }
 
       await db.query(`
         INSERT INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status)
