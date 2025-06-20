@@ -11,9 +11,13 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'secret', // For signing session ID cookies
-  resave: false,                                  // If not changed then don't save session
-  saveUninitialized: false                        // Create session of something is stored
+  secret: process.env.SESSION_SECRET || 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    sameSite: 'lax' // or 'strict' for more protection
+  }
 }));
 
 // Routes
