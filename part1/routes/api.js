@@ -15,7 +15,6 @@ router.get('/dogs', async (req, res) => {
   }
 });
 
-// Route: /api/walkrequests/open
 router.get('/walkrequests/open', async (req, res) => {
   try {
     const [rows] = await db.query(`
@@ -37,7 +36,6 @@ router.get('/walkrequests/open', async (req, res) => {
   }
 });
 
-// Route: /api/walkers/summary
 router.get('/walkers/summary', async (req, res) => {
   try {
     const [rows] = await db.query(`
