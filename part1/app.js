@@ -23,10 +23,8 @@ const db = require('./db');
 
 (async () => {
   try {
-    // Check if there are any users already
     const [users] = await db.query('SELECT COUNT(*) AS count FROM Users');
     if (users[0].count === 0) {
-      // Insert test users
       await db.query(`
         INSERT INTO Users (username, email, password_hash, role) VALUES
         ('alice123', 'alice@example.com', 'hashed123', 'owner'),
@@ -34,7 +32,6 @@ const db = require('./db');
         ('carol123', 'carol@example.com', 'hashed789', 'owner')
       `);
 
-      // Insert test dogs
       await db.query(`
         INSERT INTO Dogs (owner_id, name, size)
         VALUES
@@ -42,7 +39,6 @@ const db = require('./db');
         ((SELECT user_id FROM Users WHERE username = 'carol123'), 'Bella', 'small')
       `);
 
-      // Insert walk requests
       await db.query(`
         INSERT INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status)
         VALUES
@@ -50,7 +46,6 @@ const db = require('./db');
         ((SELECT dog_id FROM Dogs WHERE name = 'Bella'), '2025-06-10 09:30:00', 45, 'Beachside Ave', 'accepted')
       `);
 
-      // Accept application for walk
       await db.query(`
         INSERT INTO WalkApplications (request_id, walker_id, status)
         VALUES
