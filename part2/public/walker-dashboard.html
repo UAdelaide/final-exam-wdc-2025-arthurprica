@@ -70,6 +70,25 @@
         const error = ref('');
         const user = 3;
 
+      const walkerId = ref(null);
+
+async function getCurrentUser() {
+  try {
+    const res = await fetch('/api/users/me');
+    if (!res.ok) throw new Error('Not logged in');
+    const user = await res.json();
+
+    // Validate role
+    if (user.role !== 'walker') {
+      throw new Error('You are not authorized as a walker');
+    }
+
+    walkerId.value = user.user_id;
+  } catch (err) {
+    error.value = err.message;
+  }
+}
+
         async function loadWalkRequests() {
           try {
             const res = await fetch('/api/walks');
