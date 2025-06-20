@@ -77,7 +77,7 @@ const db = require('./db');
         (4,
          (SELECT user_id FROM Users WHERE username = 'elonmusk'),
          (SELECT user_id FROM Users WHERE username = 'donaldtrump'),
-         4, 'Elon's a great guy. Not better than me though.')
+         4, 'Elon is a great guy. Not better than me though.')
       `);
 
       console.log('Test data');
