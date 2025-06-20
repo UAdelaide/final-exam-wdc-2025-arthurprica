@@ -64,7 +64,7 @@ const db = require('./db');
         VALUES
         (2, (SELECT user_id FROM Users WHERE username = 'bobwalker'), 'accepted'),
         (4, (SELECT user_id FROM Users WHERE username = 'elonmusk'), 'accepted'),
-        (4, (SELECT user_id FROM Users WHERE username = 'donaltrump'), 'rejected')
+        (4, (SELECT user_id FROM Users WHERE username = 'donaldtrump'), 'rejected')
       `);
 
       await db.query(`
