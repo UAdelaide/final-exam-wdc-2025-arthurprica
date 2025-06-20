@@ -95,21 +95,7 @@
           try {
             const res = await fetch('/api/dogs');
             const dogList = await res.json();
-
-            // Attach a completely random photo to each dog
-            const dogPromises = dogList.map(async (dog) => {
-              let imageUrl = '';
-              try {
-                const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
-                const imgData = await imgRes.json();
-                imageUrl = imgData.message;
-              } catch {
-                imageUrl = 'https://via.placeholder.com/100?text=No+Image';
-              }
-              return { ...dog, photo: imageUrl };
-            });
-
-            dogs.value = await Promise.all(dogPromises);
+            dogs.value = dogList;  // direct assignment since photos come from API
           } catch (err) {
             console.error('Error loading dogs:', err);
           }
