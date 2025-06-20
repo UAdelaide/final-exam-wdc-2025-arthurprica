@@ -100,28 +100,31 @@ async function getCurrentUser() {
         }
 
         async function applyToWalk(requestId) {
-          try {
-            const res = await fetch(`/api/walks/${requestId}/apply`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ walker_id: user })
-            });
-            const result = await res.json();
+  try {
+    if (!walkerId.value) throw new Error('Walker ID not loaded');
 
-            if (!res.ok) throw new Error(result.error || 'Application failed');
-            message.value = result.message;
-            error.value = '';
-            await loadWalkRequests();
-          } catch (err) {
-            error.value = err.message;
-            message.value = '';
-          }
-        }
+    const res = await fetch(`/api/walks/${requestId}/apply`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ walker_id: walkerId.value })
+    });
+
+    const result = await res.json();
+    if (!res.ok) throw new Error(result.error || 'Application failed');
+
+    message.value = result.message;
+    error.value = '';
+    await loadWalkRequests();
+  } catch (err) {
+    error.value = err.message;
+    message.value = '';
+  }
+}
 
         onMounted(() => {
-          loadWalkRequests();
-        });
-
+  getCurrentUser();      // Fetch walker ID
+  loadWalkRequests();    // Load walk requests
+});
         return {
           walks,
           message,
