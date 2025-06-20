@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
@@ -10,11 +9,6 @@ const session = require('express-session');  // Add session
 // Middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));
-
-app.use(cors({
-  origin: 'http://localhost:8080',
-  credentials: true
-}));
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'secret',
