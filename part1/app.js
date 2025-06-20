@@ -23,6 +23,8 @@ const db = require('./db');
 
 (async () => {
   try {
+    const [users] = await db.query('SELECT COUNT(*) AS count FROM Users');
+    if (users[0].count === 0) {
       await db.query(`
         INSERT INTO Users (username, email, password_hash, role) VALUES
         ('alice123', 'alice@example.com', 'hashed123', 'owner'),
@@ -79,6 +81,7 @@ const db = require('./db');
       `);
 
       console.log('Test data');
+    }
   } catch (err) {
     console.error('No test data:', err.message);
   }
