@@ -25,7 +25,6 @@ app.use('/api', apiRouter);
     const connection = await mysql.createConnection({
       host: 'localhost',
       user: 'root',
-      // password: 'your_password', // add this if you use a password
       multipleStatements: true
     });
 
