@@ -95,7 +95,7 @@
           try {
             const res = await fetch('/api/dogs');
             const dogList = await res.json();
-            dogs.value = dogList;  // direct assignment since photos come from API
+            dogs.photo = dogList;  // direct assignment since photos come from API
           } catch (err) {
             console.error('Error loading dogs:', err);
           }
