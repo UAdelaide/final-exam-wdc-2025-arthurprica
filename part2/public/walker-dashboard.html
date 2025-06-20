@@ -35,24 +35,6 @@
     <p v-else>No available walk requests at the moment.</p>
     <button type="button" id="logoutBtn" class="btn btn-danger">Logout</button> <!-- Logout button -->
   </div>
-<script>
-  document.getElementById('logoutBtn').addEventListener('click', async () => {
-    try {
-      const res = await fetch('/api/users/logout', {
-        method: 'POST',
-        credentials: 'same-origin' // Ensures session cookie is sent
-      });
-
-      if (res.ok) {
-        window.location.href = '/'; // Redirect to login page
-      } else {
-        alert('Logout failed');
-      }
-    } catch (err) {
-      alert('Logout error');
-    }
-  });
-</script>
 
   <script>
     const { createApp, ref, onMounted } = Vue;
