@@ -35,7 +35,7 @@ router.get('/me', (req, res) => {
   res.json(req.session.user);
 });
 
-// POST login - stores user in session
+// POST login (modified)
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
     }
 
     const user = rows[0];
-    req.session.user = user; // Store user session after login
+    req.session.user = user; // Store user session after logging in
 
     res.json({ message: 'Login successful', user });
   } catch (error) {
