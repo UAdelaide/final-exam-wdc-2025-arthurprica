@@ -74,10 +74,10 @@ const db = require('./db');
          (SELECT user_id FROM Users WHERE username = 'bobwalker'),
          (SELECT user_id FROM Users WHERE username = 'carol123'),
          5, 'Great with my dog!')
-        (2,
+        (4,
          (SELECT user_id FROM Users WHERE username = 'elonmusk'),
          (SELECT user_id FROM Users WHERE username = 'donaldtrump'),
-         5, 'Elon's a great guy. Not better than me though.')
+         4, 'Elon's a great guy. Not better than me though.')
       `);
 
       console.log('Test data');
