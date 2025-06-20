@@ -35,9 +35,7 @@ const db = require('./db');
       `);
     }
 
-    const [dogs] = await db.query('SELECT COUNT(*) AS count FROM Dogs');
-    if (dogs[0].count === 0)
-        { await db.query(`
+      await db.query(`
         INSERT INTO Dogs (owner_id, name, size)
         VALUES
         ((SELECT user_id FROM Users WHERE username = 'alice123'), 'Max', 'medium'),
@@ -46,10 +44,7 @@ const db = require('./db');
         ((SELECT user_id FROM Users WHERE username = 'donaldtrump'), 'Vance', 'small'),
         ((SELECT user_id FROM Users WHERE username = 'elonmusk'), 'X', 'large')
       `);
-    }
 
-    const [requests] = await db.query('SELECT COUNT(*) AS count FROM WalkRequests');
-    if (requests[0].count === 0) {
       await db.query(`
         INSERT INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status)
         VALUES
@@ -64,10 +59,7 @@ const db = require('./db');
         ((SELECT dog_id FROM Dogs WHERE name = 'Vance' AND owner_id = (SELECT user_id FROM Users WHERE username = 'donaldtrump')),
         '2025-06-20 10:00:00', 10, 'Tesla HQ', 'completed')
       `);
-    }
 
-    const [applications] = await db.query('SELECT COUNT(*) AS count FROM WalkApplications');
-    if (applications[0].count === 0) {
       await db.query(`
         INSERT INTO WalkApplications (request_id, walker_id, status)
         VALUES
@@ -75,10 +67,7 @@ const db = require('./db');
         (4, (SELECT user_id FROM Users WHERE username = 'elonmusk'), 'accepted'),
         (4, (SELECT user_id FROM Users WHERE username = 'donaldtrump'), 'rejected')
       `);
-    }
 
-    const [ratings] = await db.query('SELECT COUNT(*) AS count FROM WalkRatings');
-    if (ratings[0].count === 0) {
       await db.query(`
         INSERT INTO WalkRatings (request_id, walker_id, owner_id, rating, comments)
         VALUES
@@ -91,11 +80,10 @@ const db = require('./db');
          (SELECT user_id FROM Users WHERE username = 'donaldtrump'),
          4, 'Elon is a great guy. Not better than me though.')
       `);
-    }
 
       console.log('Test data');
     }
-    catch (err) {
+  } catch (err) {
     console.error('No test data:', err.message);
   }
 })();
