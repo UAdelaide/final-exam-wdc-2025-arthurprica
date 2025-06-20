@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const app = express();
 
-const session = require('express-session');  // ✅ Add session support
+const session = require('express-session');  // Add session
 
 // Middleware
 app.use(express.json());
