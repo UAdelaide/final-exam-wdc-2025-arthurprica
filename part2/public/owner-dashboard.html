@@ -67,6 +67,21 @@
   <button type="button" id="logoutBtn" class="btn btn-danger">Logout</button>
 
   <script>
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    try {
+      const res = await fetch('/api/users/logout', { method: 'POST' });
+      if (res.ok) {
+        window.location.href = '/';  // Redirect to login page
+      } else {
+        alert('Logout failed');
+      }
+    } catch (err) {
+      alert('Logout error');
+    }
+  });
+</script>
+
+  <script>
     const { createApp, ref, onMounted } = Vue;
 
     createApp({
