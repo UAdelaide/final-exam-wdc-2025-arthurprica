@@ -80,10 +80,10 @@ const db = require('./db');
          5, 'Elon's a great guy. Not better than me though.')
       `);
 
-      console.log('Test data inserted');
+      console.log('Test data');
     }
   } catch (err) {
-    console.error('Error inserting test data:', err.message);
+    console.error('No test data:', err.message);
   }
 })();
 
