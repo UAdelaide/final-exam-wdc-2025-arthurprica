@@ -35,7 +35,7 @@ const db = require('./db');
       `);
     }
 
-    const [dogs] = await db.query('SELECT COUNT(*) AS count FROM Users');
+    const [dogs] = await db.query('SELECT COUNT(*) AS count FROM Dogs');
     if (dogs[0].count === 0)
         { await db.query(`
         INSERT INTO Dogs (owner_id, name, size)
