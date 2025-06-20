@@ -75,7 +75,10 @@ const db = require('./db');
         (4, (SELECT user_id FROM Users WHERE username = 'elonmusk'), 'accepted'),
         (4, (SELECT user_id FROM Users WHERE username = 'donaldtrump'), 'rejected')
       `);
+    }
 
+    const [ratings] = await db.query('SELECT COUNT(*) AS count FROM Users');
+    if (ratings[0].count === 0) {
       await db.query(`
         INSERT INTO WalkRatings (request_id, walker_id, owner_id, rating, comments)
         VALUES
@@ -88,6 +91,7 @@ const db = require('./db');
          (SELECT user_id FROM Users WHERE username = 'donaldtrump'),
          4, 'Elon is a great guy. Not better than me though.')
       `);
+    }
 
       console.log('Test data');
     }
