@@ -64,13 +64,11 @@
             }
 
           } catch (err) {
-            error.value = err.message;  // Display login error
+            error.value = err.message;  // Login error display
           }
         }
 
-        return {
-          email,
-          password,
+        return { email, password,
           message,
           error,
           login
