@@ -28,25 +28,25 @@
       <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
 
-<h2 class="mt-5">All Registered Dogs</h2>
-<table class="table table-bordered mt-3" v-if="dogs.length">
-  <thead class="table-light">
-    <tr>
-      <th>Photo</th>
-      <th>Name</th>
-      <th>Size</th>
-      <th>Owner</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="dog in dogs" :key="dog.dog_id || dog.dog_name">
-      <td><img :src="dog.photo" :alt="dog.dog_name" style="width:100px;height:auto;"></td>
-      <td>{{ dog.dog_name }}</td>
-      <td>{{ dog.size }}</td>
-      <td>{{ dog.owner_username }}</td>
-    </tr>
-  </tbody>
-</table>
+    <h2 class="mt-5">All Registered Dogs</h2>
+    <table class="table table-bordered mt-3" v-if="dogs.length">
+      <thead class="table-light">
+        <tr>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="dog in dogs" :key="dog.dog_id || dog.dog_name">
+          <td><img :src="dog.photo" :alt="dog.dog_name" style="width:100px;height:auto;"></td>
+          <td>{{ dog.dog_name }}</td>
+          <td>{{ dog.size }}</td>
+          <td>{{ dog.owner_username }}</td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- Error message if failed to login -->
     <div v-if="error" class="alert alert-danger">{{ error }}</div>
@@ -91,29 +91,29 @@
           }
         }
 
-async function loadDogs() {
-  try {
-    const res = await fetch('/api/dogs');
-    const dogList = await res.json();
+        async function loadDogs() {
+          try {
+            const res = await fetch('/api/dogs');
+            const dogList = await res.json();
 
-    // Attach a completely random photo to each dog
-    const dogPromises = dogList.map(async (dog) => {
-      let imageUrl = '';
-      try {
-        const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
-        const imgData = await imgRes.json();
-        imageUrl = imgData.message;
-      } catch {
-        imageUrl = 'https://via.placeholder.com/100?text=No+Image';
-      }
-      return { ...dog, photo: imageUrl };
-    });
+            // Attach a completely random photo to each dog
+            const dogPromises = dogList.map(async (dog) => {
+              let imageUrl = '';
+              try {
+                const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
+                const imgData = await imgRes.json();
+                imageUrl = imgData.message;
+              } catch {
+                imageUrl = 'https://via.placeholder.com/100?text=No+Image';
+              }
+              return { ...dog, photo: imageUrl };
+            });
 
-    dogs.value = await Promise.all(dogPromises);
-  } catch (err) {
-    console.error('Error loading dogs:', err);
-  }
-}
+            dogs.value = await Promise.all(dogPromises);
+          } catch (err) {
+            console.error('Error loading dogs:', err);
+          }
+        }
 
         onMounted(() => {
           loadDogs();
@@ -126,7 +126,7 @@ async function loadDogs() {
           error,
           login,
           dogs
-         };
+        };
       }
     }).mount('#app');
   </script>
